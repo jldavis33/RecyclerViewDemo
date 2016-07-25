@@ -29,6 +29,7 @@ import android.widget.TextView;
  */
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
     private static final String TAG = "CustomAdapter";
+    private static int lastPosition;
 
     private String[] mDataSet;
 
@@ -36,19 +37,31 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
+//        private final View view;
 
-        public ViewHolder(View v) {
-            super(v);
-            // Define click listener for the ViewHolder's View.
-            v.setOnClickListener(new View.OnClickListener() {
+        public ViewHolder(View itemView) {
+            super(itemView);
+            // Define click listener for the ViewHolde's View.
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "Element " + getPosition() + " clicked.");
+
+                    // set lastPosition to [this] position
+//                    lastPosition = getPosition();
+                    notifyItemChanged(lastPosition);
+                    lastPosition = getPosition();
+                    notifyItemChanged(lastPosition);
                 }
             });
-            textView = (TextView) v.findViewById(R.id.textView);
+
+            textView = (TextView) itemView.findViewById(R.id.textView);
+
+            // check if View's position equals the last selected
+
+            itemView.setSelected(false);
         }
 
         public TextView getTextView() {
@@ -87,6 +100,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
         viewHolder.getTextView().setText(mDataSet[position]);
+
+        //todo
+        viewHolder.itemView.setSelected(lastPosition == position);
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
