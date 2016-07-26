@@ -43,14 +43,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         public ViewHolder(View itemView) {
             super(itemView);
-            // Define click listener for the ViewHolde's View.
+            // Define click listener for the ViewHolder's View.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "Element " + getPosition() + " clicked.");
 
                     // set lastPosition to [this] position
-//                    lastPosition = getPosition();
                     notifyItemChanged(lastPosition);
                     lastPosition = getPosition();
                     notifyItemChanged(lastPosition);
@@ -58,10 +57,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             });
 
             textView = (TextView) itemView.findViewById(R.id.textView);
-
-            // check if View's position equals the last selected
-
-            itemView.setSelected(false);
         }
 
         public TextView getTextView() {
@@ -101,7 +96,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         // with that element
         viewHolder.getTextView().setText(mDataSet[position]);
 
-        //todo
+        // check if View's position equals the last selected
         viewHolder.itemView.setSelected(lastPosition == position);
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
