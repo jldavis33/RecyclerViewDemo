@@ -43,6 +43,7 @@ int dimen margin_tiny 0x7f04000b
 int dimen vertical_page_margin 0x7f040001
 int drawable ic_launcher 0x7f020000
 int drawable tile 0x7f020001
+int drawable view_item_bg 0x7f020002
 int id alignBounds 0x7f090002
 int id alignMargins 0x7f090003
 int id bottom 0x7f090004
